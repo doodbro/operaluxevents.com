@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Repertoire · Opera Lux Events</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --cream: #faf8f4;
+      --white: #ffffff;
+      --black: #0d0d0d;
+      --gold: #b8963e;
+      --gold-light: #d4b26a;
+      --grey: #6b6b6b;
+      --grey-light: #e8e4de;
+      --serif: 'Cormorant Garamond', Georgia, serif;
+      --sans: 'Jost', sans-serif;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--sans); background: var(--cream); color: var(--black); font-weight: 300; overflow-x: hidden; }
+
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.5rem 4rem;
+      background: rgba(250,248,244,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--grey-light);
+    }
+    .nav-logo { font-family: var(--serif); font-size: 1.3rem; font-weight: 400; letter-spacing: 0.08em; color: var(--black); text-decoration: none; }
+    .nav-logo span { color: var(--gold); }
+    .nav-links { display: flex; gap: 2.5rem; align-items: center; }
+    .nav-links a { font-family: var(--sans); font-size: 0.7rem; font-weight: 400; letter-spacing: 0.15em; text-transform: uppercase; color: var(--grey); text-decoration: none; transition: color 0.3s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--black); }
+    .nav-cta { font-family: var(--sans); font-size: 0.75rem; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; color: var(--black); text-decoration: none; border-bottom: 1px solid var(--gold); padding-bottom: 2px; transition: color 0.3s; }
+    .nav-cta:hover { color: var(--gold); }
+
+    .page-hero {
+      padding: 11rem 2rem 6rem;
+      text-align: center;
+      background: var(--black);
+      position: relative; overflow: hidden;
+    }
+    .page-hero::before {
+      content: '';
+      position: absolute; top: -10%; left: 50%; transform: translateX(-50%);
+      width: 700px; height: 700px;
+      background: radial-gradient(ellipse, rgba(184,150,62,0.1) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .section-label { font-size: 0.65rem; font-weight: 500; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.5rem; }
+    .page-hero h1 { font-family: var(--serif); font-size: clamp(3rem, 7vw, 5.5rem); font-weight: 300; line-height: 1.05; color: var(--white); margin-bottom: 1rem; font-style: italic; }
+    .page-hero .sub { font-size: 1rem; color: rgba(255,255,255,0.4); line-height: 1.8; }
+
+    .section { padding: 6rem 2rem; }
+    .section-inner { max-width: 1000px; margin: 0 auto; }
+
+    /* Category tabs */
+    .cat-tabs { display: flex; gap: 0; border-bottom: 1px solid var(--grey-light); margin-bottom: 4rem; overflow-x: auto; }
+    .cat-tab { font-size: 0.7rem; font-weight: 400; letter-spacing: 0.15em; text-transform: uppercase; color: var(--grey); padding: 1rem 2rem; cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -1px; transition: color 0.3s, border-color 0.3s; white-space: nowrap; }
+    .cat-tab.active, .cat-tab:hover { color: var(--black); border-bottom-color: var(--gold); }
+
+    .cat-section { display: none; }
+    .cat-section.active { display: block; }
+
+    .cat-header { margin-bottom: 3rem; }
+    .cat-header h2 { font-family: var(--serif); font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 300; line-height: 1.2; margin-bottom: 0.75rem; }
+    .cat-header p { font-size: 0.95rem; color: var(--grey); line-height: 1.8; max-width: 600px; }
+
+    .song-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border: 1px solid var(--grey-light); }
+    .song-item {
+      padding: 1.4rem 1.8rem;
+      border-bottom: 1px solid var(--grey-light);
+      display: flex; justify-content: space-between; align-items: baseline;
+      gap: 1rem;
+      transition: background 0.2s;
+    }
+    .song-item:hover { background: var(--white); }
+    .song-item:nth-child(odd) { border-right: 1px solid var(--grey-light); }
+    .song-item:last-child, .song-item:nth-last-child(2):nth-child(odd) { border-bottom: none; }
+    .song-title { font-family: var(--serif); font-size: 1.05rem; font-weight: 400; color: var(--black); }
+    .song-composer { font-size: 0.7rem; letter-spacing: 0.1em; color: var(--grey); white-space: nowrap; }
+
+    .cat-note { margin-top: 2rem; font-size: 0.85rem; font-style: italic; font-family: var(--serif); color: var(--grey); text-align: center; }
+
+    /* Statement band */
+    .statement-bg { background: var(--black); padding: 6rem 2rem; text-align: center; position: relative; overflow: hidden; }
+    .statement-bg::before { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 600px; height: 600px; background: radial-gradient(ellipse, rgba(184,150,62,0.1) 0%, transparent 70%); pointer-events: none; }
+    .statement-main { font-family: var(--serif); font-size: clamp(1.8rem, 4vw, 3.2rem); font-weight: 300; font-style: italic; color: var(--white); line-height: 1.3; position: relative; max-width: 700px; margin: 0 auto 1rem; }
+    .statement-main span { color: var(--gold); font-style: normal; }
+    .statement-sub { font-size: 0.85rem; color: rgba(255,255,255,0.35); letter-spacing: 0.05em; position: relative; }
+
+    /* CTA */
+    .cta-bg { background: var(--cream); padding: 7rem 2rem; text-align: center; }
+    .cta-inner { max-width: 600px; margin: 0 auto; }
+    .cta-inner h2 { font-family: var(--serif); font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 300; line-height: 1.3; margin-bottom: 1rem; }
+    .cta-inner p { font-size: 0.95rem; color: var(--grey); line-height: 1.8; margin-bottom: 2.5rem; }
+    .btn { display: inline-block; font-family: var(--sans); font-size: 0.75rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--black); background: var(--gold); padding: 1.1rem 3rem; border: none; cursor: pointer; transition: background 0.3s; text-decoration: none; }
+    .btn:hover { background: var(--gold-light); }
+
+    footer { background: #080808; padding: 2rem 4rem; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(255,255,255,0.05); }
+    footer .logo { font-family: var(--serif); font-size: 1rem; color: rgba(255,255,255,0.4); }
+    footer .logo span { color: var(--gold); }
+    footer p { font-size: 0.7rem; color: rgba(255,255,255,0.2); letter-spacing: 0.1em; }
+
+    @media (max-width: 768px) {
+      nav { padding: 1.2rem 1.5rem; }
+      .nav-links { display: none; }
+      .song-grid { grid-template-columns: 1fr; }
+      .song-item:nth-child(odd) { border-right: none; }
+      .song-item:last-child { border-bottom: none; }
+      footer { flex-direction: column; gap: 1rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a class="nav-logo" href="index.html">Opera <span>Lux</span> Events</a>
+    <div class="nav-links">
+      <a href="about.html">About</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="repertoire.html" class="active">Repertoire</a>
+      <a href="testimonials.html">Reviews</a>
+    </div>
+    <a class="nav-cta" href="index.html#contact">Book an Event</a>
+  </nav>
+
+  <!-- PAGE HERO -->
+  <section class="page-hero">
+    <p class="section-label">Repertoire</p>
+    <h1>From Puccini<br>to Sondheim</h1>
+    <p class="sub">A selection of what Derek performs — every note live, every note from memory.</p>
+  </section>
+
+  <!-- REPERTOIRE -->
+  <section class="section" style="background: var(--cream);">
+    <div class="section-inner">
+
+      <div class="cat-tabs">
+        <div class="cat-tab active" onclick="showCat('opera', this)">Opera</div>
+        <div class="cat-tab" onclick="showCat('operetta', this)">Operetta</div>
+        <div class="cat-tab" onclick="showCat('musical', this)">Musical Theatre</div>
+        <div class="cat-tab" onclick="showCat('crossover', this)">Crossover</div>
+      </div>
+
+      <!-- OPERA -->
+      <div class="cat-section active" id="opera">
+        <div class="cat-header">
+          <p class="section-label">Opera</p>
+          <h2>Mozart, Puccini, Verdi<br>and the great tradition.</h2>
+          <p>The full power of the operatic voice — from the soaring heights of Puccini to the aristocratic elegance of Mozart.</p>
+        </div>
+        <div class="song-grid">
+          <div class="song-item"><span class="song-title">Nessun Dorma</span><span class="song-composer">Puccini — Turandot</span></div>
+          <div class="song-item"><span class="song-title">Che gelida manina</span><span class="song-composer">Puccini — La Bohème</span></div>
+          <div class="song-item"><span class="song-title">La donna è mobile</span><span class="song-composer">Verdi — Rigoletto</span></div>
+          <div class="song-item"><span class="song-title">Una furtiva lagrima</span><span class="song-composer">Donizetti — L'elisir d'amore</span></div>
+          <div class="song-item"><span class="song-title">Il mio tesoro</span><span class="song-composer">Mozart — Don Giovanni</span></div>
+          <div class="song-item"><span class="song-title">Dalla sua pace</span><span class="song-composer">Mozart — Don Giovanni</span></div>
+          <div class="song-item"><span class="song-title">Recondita armonia</span><span class="song-composer">Puccini — Tosca</span></div>
+          <div class="song-item"><span class="song-title">E lucevan le stelle</span><span class="song-composer">Puccini — Tosca</span></div>
+          <div class="song-item"><span class="song-title">Celeste Aida</span><span class="song-composer">Verdi — Aida</span></div>
+          <div class="song-item"><span class="song-title">Un'aura amorosa</span><span class="song-composer">Mozart — Così fan tutte</span></div>
+        </div>
+        <p class="cat-note">Selection shown. Full aria list available on request.</p>
+      </div>
+
+      <!-- OPERETTA -->
+      <div class="cat-section" id="operetta">
+        <div class="cat-header">
+          <p class="section-label">Operetta</p>
+          <h2>Lehár, Strauss and<br>the golden age of light opera.</h2>
+          <p>Charming, romantic, and irresistibly melodic — the operetta repertoire brings a warm sophistication perfect for celebratory occasions.</p>
+        </div>
+        <div class="song-grid">
+          <div class="song-item"><span class="song-title">Dein ist mein ganzes Herz</span><span class="song-composer">Lehár — Das Land des Lächelns</span></div>
+          <div class="song-item"><span class="song-title">Lippen schweigen</span><span class="song-composer">Lehár — Die lustige Witwe</span></div>
+          <div class="song-item"><span class="song-title">Vilja-Lied</span><span class="song-composer">Lehár — Die lustige Witwe</span></div>
+          <div class="song-item"><span class="song-title">Gern hab' ich die Frau'n geküsst</span><span class="song-composer">Lehár — Paganini</span></div>
+          <div class="song-item"><span class="song-title">Tauben sind wir</span><span class="song-composer">Lehár — Der Graf von Luxemburg</span></div>
+          <div class="song-item"><span class="song-title">Im Chambre séparée</span><span class="song-composer">Heuberger — Der Opernball</span></div>
+          <div class="song-item"><span class="song-title">Auch ich war ein Jüngling</span><span class="song-composer">Zeller — Der Vogelhändler</span></div>
+          <div class="song-item"><span class="song-title">Sei nicht bös</span><span class="song-composer">Zeller — Der Kellermeister</span></div>
+        </div>
+        <p class="cat-note">Selection shown. Full operetta list available on request.</p>
+      </div>
+
+      <!-- MUSICAL THEATRE -->
+      <div class="cat-section" id="musical">
+        <div class="cat-header">
+          <p class="section-label">Musical Theatre</p>
+          <h2>Sondheim, Rodgers &amp;<br>Hammerstein, and Broadway.</h2>
+          <p>The beloved canon of musical theatre performed with a full operatic voice — bringing new depth and power to timeless songs.</p>
+        </div>
+        <div class="song-grid">
+          <div class="song-item"><span class="song-title">Some Enchanted Evening</span><span class="song-composer">Rodgers — South Pacific</span></div>
+          <div class="song-item"><span class="song-title">If I Loved You</span><span class="song-composer">Rodgers — Carousel</span></div>
+          <div class="song-item"><span class="song-title">The Music of the Night</span><span class="song-composer">Lloyd Webber — Phantom of the Opera</span></div>
+          <div class="song-item"><span class="song-title">Bring Him Home</span><span class="song-composer">Schönberg — Les Misérables</span></div>
+          <div class="song-item"><span class="song-title">Being Alive</span><span class="song-composer">Sondheim — Company</span></div>
+          <div class="song-item"><span class="song-title">Maria</span><span class="song-composer">Bernstein — West Side Story</span></div>
+          <div class="song-item"><span class="song-title">Tonight</span><span class="song-composer">Bernstein — West Side Story</span></div>
+          <div class="song-item"><span class="song-title">My Favourite Things</span><span class="song-composer">Rodgers — The Sound of Music</span></div>
+          <div class="song-item"><span class="song-title">Edelweiss</span><span class="song-composer">Rodgers — The Sound of Music</span></div>
+          <div class="song-item"><span class="song-title">All I Ask of You</span><span class="song-composer">Lloyd Webber — Phantom of the Opera</span></div>
+        </div>
+        <p class="cat-note">Selection shown. Full list available on request.</p>
+      </div>
+
+      <!-- CROSSOVER -->
+      <div class="cat-section" id="crossover">
+        <div class="cat-header">
+          <p class="section-label">Crossover</p>
+          <h2>Beloved classics performed<br>with full operatic voice.</h2>
+          <p>Cinematic favourites, Italian songs, and beloved standards — the crossover repertoire connects opera to every audience.</p>
+        </div>
+        <div class="song-grid">
+          <div class="song-item"><span class="song-title">Con te partirò</span><span class="song-composer">Bocelli / Sartori</span></div>
+          <div class="song-item"><span class="song-title">O Sole Mio</span><span class="song-composer">di Capua</span></div>
+          <div class="song-item"><span class="song-title">Granada</span><span class="song-composer">Agustín Lara</span></div>
+          <div class="song-item"><span class="song-title">Funiculi Funicula</span><span class="song-composer">Denza</span></div>
+          <div class="song-item"><span class="song-title">Mattinata</span><span class="song-composer">Leoncavallo</span></div>
+          <div class="song-item"><span class="song-title">Core 'ngrato</span><span class="song-composer">Cardillo</span></div>
+          <div class="song-item"><span class="song-title">Torna a Surriento</span><span class="song-composer">de Curtis</span></div>
+          <div class="song-item"><span class="song-title">Ave Maria</span><span class="song-composer">Schubert / Gounod</span></div>
+          <div class="song-item"><span class="song-title">You Raise Me Up</span><span class="song-composer">Løvland / Graham</span></div>
+          <div class="song-item"><span class="song-title">Hallelujah</span><span class="song-composer">Leonard Cohen</span></div>
+        </div>
+        <p class="cat-note">Selection shown. Full crossover list available on request.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- STATEMENT -->
+  <section class="statement-bg">
+    <p class="statement-main">Every evening closes with<br><span>something that stops the room.</span></p>
+    <p class="statement-sub">Performed live. Every note, every time.</p>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-bg">
+    <div class="cta-inner">
+      <p class="section-label">Bespoke Programmes</p>
+      <h2>Want a specific song<br>or a custom programme?</h2>
+      <p>Derek curates every programme to the event. Get in touch to discuss your occasion — requests are always welcome.</p>
+      <a href="index.html#contact" class="btn">Request a Full Repertoire List</a>
+    </div>
+  </section>
+
+  <footer>
+    <div class="logo">Opera <span>Lux</span> Events</div>
+    <p>© 2026 Opera Lux Events · Germany &amp; Europe</p>
+  </footer>
+
+  <script>
+    function showCat(id, tab) {
+      document.querySelectorAll('.cat-section').forEach(s => s.classList.remove('active'));
+      document.querySelectorAll('.cat-tab').forEach(t => t.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+      tab.classList.add('active');
+    }
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Gallery · Opera Lux Events</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --cream: #faf8f4;
+      --white: #ffffff;
+      --black: #0d0d0d;
+      --gold: #b8963e;
+      --gold-light: #d4b26a;
+      --grey: #6b6b6b;
+      --grey-light: #e8e4de;
+      --serif: 'Cormorant Garamond', Georgia, serif;
+      --sans: 'Jost', sans-serif;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--sans); background: var(--cream); color: var(--black); font-weight: 300; overflow-x: hidden; }
+
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.5rem 4rem;
+      background: rgba(250,248,244,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--grey-light);
+    }
+    .nav-logo { font-family: var(--serif); font-size: 1.3rem; font-weight: 400; letter-spacing: 0.08em; color: var(--black); text-decoration: none; }
+    .nav-logo span { color: var(--gold); }
+    .nav-links { display: flex; gap: 2.5rem; align-items: center; }
+    .nav-links a { font-family: var(--sans); font-size: 0.7rem; font-weight: 400; letter-spacing: 0.15em; text-transform: uppercase; color: var(--grey); text-decoration: none; transition: color 0.3s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--black); }
+    .nav-cta { font-family: var(--sans); font-size: 0.75rem; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; color: var(--black); text-decoration: none; border-bottom: 1px solid var(--gold); padding-bottom: 2px; transition: color 0.3s; }
+    .nav-cta:hover { color: var(--gold); }
+
+    .page-hero {
+      padding: 11rem 2rem 6rem;
+      text-align: center;
+      background: var(--cream);
+      position: relative; overflow: hidden;
+    }
+    .page-hero::before {
+      content: '';
+      position: absolute; top: -10%; left: 50%; transform: translateX(-50%);
+      width: 700px; height: 700px;
+      background: radial-gradient(ellipse, rgba(184,150,62,0.07) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .section-label { font-size: 0.65rem; font-weight: 500; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.5rem; }
+    .page-hero h1 { font-family: var(--serif); font-size: clamp(3rem, 7vw, 5.5rem); font-weight: 300; line-height: 1.05; margin-bottom: 1rem; }
+    .page-hero .sub { font-size: 1rem; color: var(--grey); line-height: 1.8; }
+
+    .section { padding: 6rem 2rem; }
+    .section-inner { max-width: 1060px; margin: 0 auto; }
+    .section h2 { font-family: var(--serif); font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 300; line-height: 1.2; margin-bottom: 2.5rem; }
+
+    /* Photo grid */
+    .photo-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.75rem;
+    }
+    .photo-slot {
+      aspect-ratio: 4 / 3;
+      background: var(--grey-light);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+      position: relative;
+      overflow: hidden;
+      transition: background 0.3s;
+    }
+    .photo-slot:hover { background: #dedad3; }
+    .photo-slot.tall { grid-row: span 2; aspect-ratio: auto; }
+    .photo-slot img { position: absolute; top: 0; left: 0; width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.5s ease; }
+    .photo-slot:hover img { transform: scale(1.04); }
+    .photo-slot-icon {
+      width: 36px; height: 36px;
+      border: 1px solid rgba(184,150,62,0.35);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .photo-slot-icon::after { content: '+'; font-size: 1.1rem; color: var(--gold); font-weight: 300; }
+    .photo-slot span { font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(107,107,107,0.6); }
+
+    /* Featured slot — larger */
+    .photo-slot.featured { grid-column: span 2; aspect-ratio: 16/7; }
+
+    /* Video grid */
+    .video-bg { background: var(--black); padding: 6rem 2rem; }
+    .video-bg .section-label { color: var(--gold-light); }
+    .video-bg h2 { font-family: var(--serif); font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 300; color: var(--white); margin-bottom: 2.5rem; }
+    .video-grid { display: grid; grid-template-columns: 1fr 2fr; gap: 1rem; max-width: 1060px; margin: 0 auto; }
+    .video-grid .video-slot.portrait { aspect-ratio: 9/16; }
+    .video-grid .video-slot.landscape { aspect-ratio: 16/9; }
+    .video-slot {
+      aspect-ratio: 16/9;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 1rem; position: relative; overflow: hidden;
+      transition: border-color 0.3s;
+    }
+    .video-slot:hover { border-color: var(--gold); }
+    .play-btn {
+      width: 52px; height: 52px;
+      border: 1px solid rgba(184,150,62,0.5);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .play-btn::after { content: '▶'; font-size: 0.85rem; color: var(--gold); margin-left: 3px; }
+    .video-slot span { font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.25); }
+    .video-coming { font-size: 0.6rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); border: 1px solid rgba(184,150,62,0.3); padding: 0.25rem 0.75rem; }
+
+    /* Instagram section */
+    .insta-bg { background: var(--cream); padding: 6rem 2rem; text-align: center; }
+    .insta-inner { max-width: 600px; margin: 0 auto; }
+    .insta-inner h2 { font-family: var(--serif); font-size: clamp(2rem, 4vw, 3rem); font-weight: 300; margin-bottom: 1rem; }
+    .insta-inner p { font-size: 0.95rem; color: var(--grey); line-height: 1.8; margin-bottom: 2.5rem; }
+    .insta-handle { font-size: 0.78rem; letter-spacing: 0.15em; color: var(--gold); font-weight: 500; margin-bottom: 2rem; display: block; }
+
+    .btn { display: inline-block; font-family: var(--sans); font-size: 0.75rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--black); background: var(--gold); padding: 1.1rem 3rem; border: none; cursor: pointer; transition: background 0.3s; text-decoration: none; }
+    .btn:hover { background: var(--gold-light); }
+    .btn-outline { background: transparent; color: var(--white); border: 1px solid rgba(255,255,255,0.3); padding: 1rem 2.5rem; font-family: var(--sans); font-size: 0.72rem; font-weight: 400; letter-spacing: 0.2em; text-transform: uppercase; text-decoration: none; transition: border-color 0.3s, color 0.3s; display: inline-block; }
+    .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+
+    footer { background: #080808; padding: 2rem 4rem; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(255,255,255,0.05); }
+    footer .logo { font-family: var(--serif); font-size: 1rem; color: rgba(255,255,255,0.4); }
+    footer .logo span { color: var(--gold); }
+    footer p { font-size: 0.7rem; color: rgba(255,255,255,0.2); letter-spacing: 0.1em; }
+
+    @media (max-width: 768px) {
+      nav { padding: 1.2rem 1.5rem; }
+      .nav-links { display: none; }
+      .photo-grid { grid-template-columns: repeat(2, 1fr); }
+      .photo-slot.featured { grid-column: span 2; aspect-ratio: 16/9; }
+      .photo-slot.tall { grid-row: span 1; aspect-ratio: 4/3; }
+      .video-grid { grid-template-columns: 1fr; }
+      footer { flex-direction: column; gap: 1rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a class="nav-logo" href="index.html">Opera <span>Lux</span> Events</a>
+    <div class="nav-links">
+      <a href="about.html">About</a>
+      <a href="gallery.html" class="active">Gallery</a>
+      <a href="repertoire.html">Repertoire</a>
+      <a href="testimonials.html">Reviews</a>
+    </div>
+    <a class="nav-cta" href="index.html#contact">Book an Event</a>
+  </nav>
+
+  <!-- PAGE HERO -->
+  <section class="page-hero">
+    <p class="section-label">Gallery &amp; Media</p>
+    <h1>A Performance<br>Worth Seeing</h1>
+    <p class="sub">Photography and video from events across Germany and Europe.</p>
+  </section>
+
+  <!-- PHOTO GRID -->
+  <section class="section" style="background: var(--white);">
+    <div class="section-inner">
+      <p class="section-label">Photography</p>
+      <h2>Moments from the stage.</h2>
+      <div class="photo-grid">
+        <div class="photo-slot featured">
+          <img src="images/stage-solo.jpg" alt="Derek Rue on stage" />
+        </div>
+        <div class="photo-slot tall">
+          <img src="images/headshot-bw.jpg" alt="Derek Rue" />
+        </div>
+        <div class="photo-slot">
+          <img src="images/stage-duo.jpg" alt="Derek Rue performing with soprano" />
+        </div>
+        <div class="photo-slot">
+          <img src="images/concert.jpg" alt="Derek Rue at press concert" />
+        </div>
+        <div class="photo-slot">
+          <img src="images/stage-costume.jpg" alt="Derek Rue in costume" />
+        </div>
+        <div class="photo-slot">
+          <img src="images/stage-vest.jpg" alt="Derek Rue backstage" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- VIDEO SECTION -->
+  <section class="video-bg">
+    <div class="section-inner">
+      <p class="section-label">Video</p>
+      <h2>Watch Derek perform.</h2>
+      <div class="video-grid">
+        <!-- Short: portrait -->
+        <div class="video-slot portrait" style="background:#000; border:none; overflow:hidden;">
+          <iframe src="https://www.youtube.com/embed/CkbCOOeT-vc"
+            title="Derek Rue · Featured Performance"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen
+            style="position:absolute; top:0; left:0; width:100%; height:100%; border:none;"></iframe>
+        </div>
+        <!-- Regular video: landscape -->
+        <div class="video-slot landscape" style="background:#000; border:none; overflow:hidden;">
+          <iframe src="https://www.youtube.com/embed/cOwJhvGLqI4?start=60"
+            title="Derek Rue · Live at the Event"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            allowfullscreen
+            style="position:absolute; top:0; left:0; width:100%; height:100%; border:none;"></iframe>
+        </div>
+      </div>
+      <div style="text-align:center; margin-top: 3rem;">
+        <a href="https://www.instagram.com" class="btn-outline" target="_blank">Watch on Instagram</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- INSTAGRAM -->
+  <section class="insta-bg">
+    <div class="insta-inner">
+      <p class="section-label">Follow Along</p>
+      <h2>Behind the scenes &amp; live clips</h2>
+      <p>Stay up to date with performances, events, and behind-the-scenes moments. New content added regularly.</p>
+      <span class="insta-handle">@operaluxevents</span>
+      <br>
+      <a href="index.html#contact" class="btn">Book an Event</a>
+    </div>
+  </section>
+
+  <footer>
+    <div class="logo">Opera <span>Lux</span> Events</div>
+    <p>© 2026 Opera Lux Events · Germany &amp; Europe</p>
+  </footer>
+
+</body>
+</html>

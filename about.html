@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>About · Opera Lux Events</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --cream: #faf8f4;
+      --white: #ffffff;
+      --black: #0d0d0d;
+      --gold: #b8963e;
+      --gold-light: #d4b26a;
+      --grey: #6b6b6b;
+      --grey-light: #e8e4de;
+      --serif: 'Cormorant Garamond', Georgia, serif;
+      --sans: 'Jost', sans-serif;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--sans); background: var(--cream); color: var(--black); font-weight: 300; overflow-x: hidden; }
+
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.5rem 4rem;
+      background: rgba(250,248,244,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--grey-light);
+    }
+    .nav-logo { font-family: var(--serif); font-size: 1.3rem; font-weight: 400; letter-spacing: 0.08em; color: var(--black); text-decoration: none; }
+    .nav-logo span { color: var(--gold); }
+    .nav-links { display: flex; gap: 2.5rem; align-items: center; }
+    .nav-links a { font-family: var(--sans); font-size: 0.7rem; font-weight: 400; letter-spacing: 0.15em; text-transform: uppercase; color: var(--grey); text-decoration: none; transition: color 0.3s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--black); }
+    .nav-cta { font-family: var(--sans); font-size: 0.75rem; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; color: var(--black); text-decoration: none; border-bottom: 1px solid var(--gold); padding-bottom: 2px; transition: color 0.3s; }
+    .nav-cta:hover { color: var(--gold); }
+
+    .page-hero {
+      padding: 11rem 2rem 6rem;
+      text-align: center;
+      background: var(--cream);
+      position: relative;
+      overflow: hidden;
+    }
+    .page-hero::before {
+      content: '';
+      position: absolute; top: -10%; left: 50%; transform: translateX(-50%);
+      width: 700px; height: 700px;
+      background: radial-gradient(ellipse, rgba(184,150,62,0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .section-label { font-size: 0.65rem; font-weight: 500; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.5rem; }
+    .page-hero h1 { font-family: var(--serif); font-size: clamp(3rem, 7vw, 5.5rem); font-weight: 300; line-height: 1.05; margin-bottom: 1rem; }
+    .page-hero .sub { font-size: 0.85rem; font-weight: 400; letter-spacing: 0.2em; text-transform: uppercase; color: var(--grey); }
+
+    .section { padding: 6rem 2rem; }
+    .section-inner { max-width: 1000px; margin: 0 auto; }
+    .section h2 { font-family: var(--serif); font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 300; line-height: 1.2; margin-bottom: 2.5rem; }
+
+    .bio-grid { display: grid; grid-template-columns: 1fr 1.6fr; gap: 5rem; align-items: start; }
+    .bio-accent {
+      font-family: var(--serif);
+      font-size: clamp(3rem, 6vw, 5rem);
+      font-weight: 300; font-style: italic;
+      line-height: 1.1;
+      color: var(--grey-light);
+      position: sticky; top: 8rem;
+    }
+    .bio-accent em { display: block; color: var(--gold); font-size: 0.38em; font-style: normal; font-family: var(--sans); font-weight: 400; letter-spacing: 0.2em; text-transform: uppercase; margin-top: 1rem; }
+
+    .bio-photo { position: sticky; top: 8rem; overflow: hidden; aspect-ratio: 3/4; }
+    .bio-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .bio-photo-caption { font-size: 0.62rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--grey); margin-top: 0.75rem; }
+
+    .stage-hero { width: 100%; max-height: 600px; overflow: hidden; position: relative; }
+    .stage-hero img { width: 100%; height: 100%; object-fit: cover; object-position: center 20%; display: block; max-height: 600px; }
+    .bio-text p { font-size: 1rem; line-height: 1.9; color: var(--grey); margin-bottom: 1.4rem; }
+    .bio-text p strong { color: var(--black); font-weight: 500; }
+
+    .divider { height: 1px; background: var(--grey-light); max-width: 1000px; margin: 0 auto; }
+
+    .training-bg { background: var(--white); padding: 6rem 2rem; }
+    .training-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+    .training-card {
+      padding: 2.5rem;
+      border: 1px solid var(--grey-light);
+      transition: border-color 0.3s;
+    }
+    .training-card:hover { border-color: var(--gold); }
+    .training-year { font-size: 0.65rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.75rem; }
+    .training-title { font-family: var(--serif); font-size: 1.3rem; color: var(--black); margin-bottom: 0.5rem; }
+    .training-desc { font-size: 0.88rem; color: var(--grey); line-height: 1.7; }
+
+    .stats-bg { background: var(--black); padding: 5rem 2rem; }
+    .stats-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.06); max-width: 1000px; margin: 0 auto; }
+    .stat-item { background: var(--black); padding: 3rem 2rem; text-align: center; }
+    .stat-num { font-family: var(--serif); font-size: 3rem; font-weight: 300; color: var(--gold); margin-bottom: 0.5rem; }
+    .stat-label { font-size: 0.68rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.35); }
+
+    .voice-bg { background: var(--cream); padding: 6rem 2rem; }
+    .voice-inner { max-width: 1000px; margin: 0 auto; }
+    .voice-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; margin-top: 2.5rem; }
+    .voice-card { padding: 2rem; background: var(--white); }
+    .voice-card-title { font-family: var(--serif); font-size: 1.2rem; margin-bottom: 0.5rem; }
+    .voice-card-desc { font-size: 0.85rem; color: var(--grey); line-height: 1.7; }
+
+    .photos-bg { background: var(--white); padding: 6rem 2rem; }
+    .coming-soon-block { text-align: center; padding: 5rem 3rem; border: 1px solid var(--grey-light); max-width: 600px; margin: 0 auto; }
+    .coming-soon-tag { display: inline-block; font-size: 0.62rem; font-weight: 500; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); border: 1px solid var(--gold); padding: 0.35rem 1rem; margin-bottom: 1.5rem; }
+    .coming-soon-block h3 { font-family: var(--serif); font-size: 2rem; font-weight: 300; margin-bottom: 0.75rem; }
+    .coming-soon-block p { font-size: 0.9rem; color: var(--grey); line-height: 1.7; }
+
+    .cta-bg { background: var(--black); padding: 7rem 2rem; text-align: center; position: relative; overflow: hidden; }
+    .cta-bg::before { content: ''; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); width: 600px; height: 600px; background: radial-gradient(ellipse, rgba(184,150,62,0.08) 0%, transparent 70%); pointer-events: none; }
+    .cta-bg h2 { font-family: var(--serif); font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 300; font-style: italic; color: var(--white); margin-bottom: 0.75rem; position: relative; }
+    .cta-bg h2 span { color: var(--gold); font-style: normal; }
+    .cta-bg p { font-size: 0.85rem; color: rgba(255,255,255,0.4); margin-bottom: 2.5rem; position: relative; }
+    .btn { display: inline-block; font-family: var(--sans); font-size: 0.75rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--black); background: var(--gold); padding: 1.1rem 3rem; border: none; cursor: pointer; transition: background 0.3s; text-decoration: none; }
+    .btn:hover { background: var(--gold-light); }
+
+    footer { background: #080808; padding: 2rem 4rem; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(255,255,255,0.05); }
+    footer .logo { font-family: var(--serif); font-size: 1rem; color: rgba(255,255,255,0.4); }
+    footer .logo span { color: var(--gold); }
+    footer p { font-size: 0.7rem; color: rgba(255,255,255,0.2); letter-spacing: 0.1em; }
+
+    @media (max-width: 768px) {
+      nav { padding: 1.2rem 1.5rem; }
+      .nav-links { display: none; }
+      .bio-grid, .training-grid, .voice-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .stats-grid { grid-template-columns: 1fr; }
+      .bio-accent { position: static; }
+      footer { flex-direction: column; gap: 1rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a class="nav-logo" href="index.html">Opera <span>Lux</span> Events</a>
+    <div class="nav-links">
+      <a href="about.html" class="active">About</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="repertoire.html">Repertoire</a>
+      <a href="testimonials.html">Reviews</a>
+    </div>
+    <a class="nav-cta" href="index.html#contact">Book an Event</a>
+  </nav>
+
+  <!-- PAGE HERO -->
+  <section class="page-hero">
+    <p class="section-label">About</p>
+    <h1>Derek Rue</h1>
+    <p class="sub">Lyric Tenor &nbsp;·&nbsp; Trier, Germany</p>
+  </section>
+
+  <!-- BIO -->
+  <section class="section" style="background: var(--white);">
+    <div class="section-inner">
+      <div class="bio-grid">
+        <div class="bio-photo">
+          <img src="images/headshot-bw.jpg" alt="Derek Rue, Lyric Tenor" />
+          <p class="bio-photo-caption">Derek Rue · Lyric Tenor</p>
+        </div>
+        <div class="bio-text">
+          <p>Derek Rue is a professional opera singer and lyric tenor based in Trier, Germany, with <strong>fifteen years of stage experience</strong> performing across Germany and Europe. A graduate of the <strong>Universität Mozarteum Salzburg</strong> — one of the world's foremost conservatoires — Derek brings the full power and artistry of the operatic tradition into modern venues with warmth, presence, and a genuine connection with his audience.</p>
+          <p>His voice combines the brilliance and agility of the lyric tenor with a rich, warm core that carries equally well in an intimate restaurant dining room and a grand concert hall. Every performance is shaped by the room, the occasion, and the people in it.</p>
+          <p>From intimate birthday celebrations and retirement milestones to corporate galas, cultural events, and embassy functions, Derek delivers something guests talk about long after the evening ends — a performance that is <strong>powerful, personal, and completely unforgettable.</strong></p>
+          <p>Based in the Moselle wine region of Germany, Derek performs regularly across Germany and throughout Europe, bringing world-class opera directly to events of every scale and character.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- TRAINING -->
+  <section class="training-bg">
+    <div class="section-inner">
+      <p class="section-label">Training &amp; Background</p>
+      <h2>A classical foundation,<br>built for the modern stage.</h2>
+      <div class="training-grid">
+        <div class="training-card">
+          <div class="training-year">Education</div>
+          <div class="training-title">Universität Mozarteum Salzburg</div>
+          <p class="training-desc">One of Europe's most prestigious music conservatoires, Salzburg. Graduate-level operatic training in voice, repertoire, and stagecraft.</p>
+        </div>
+        <div class="training-card">
+          <div class="training-year">Specialisation</div>
+          <div class="training-title">Lyric Tenor Voice</div>
+          <p class="training-desc">Trained in the Italian, German, and Austrian repertoire with a focus on lyric roles across opera, operetta, and musical theatre.</p>
+        </div>
+        <div class="training-card">
+          <div class="training-year">Experience</div>
+          <div class="training-title">15+ Years on Stage</div>
+          <p class="training-desc">Professional performance career spanning Germany, Austria, and broader Europe. Extensive experience in both theatrical and private event contexts.</p>
+        </div>
+        <div class="training-card">
+          <div class="training-year">Languages</div>
+          <div class="training-title">Multilingual Repertoire</div>
+          <p class="training-desc">Performs with native fluency in Italian, German, English, and French — bringing authenticity and depth to the full operatic canon.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATS -->
+  <div class="stats-bg">
+    <div class="stats-grid">
+      <div class="stat-item">
+        <div class="stat-num">15+</div>
+        <div class="stat-label">Years on Stage</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">200+</div>
+        <div class="stat-label">Events Performed</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-num">8+</div>
+        <div class="stat-label">Countries</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- VOICE TYPES -->
+  <section class="voice-bg">
+    <div class="voice-inner">
+      <p class="section-label">What Derek Brings</p>
+      <h2>More than a performance.<br>An experience tailored to you.</h2>
+      <div class="voice-grid">
+        <div class="voice-card">
+          <div class="voice-card-title">Presence &amp; Warmth</div>
+          <p class="voice-card-desc">Derek performs with a genuine connection to the room — reading the audience, adapting the energy, and making every guest feel part of the evening.</p>
+        </div>
+        <div class="voice-card">
+          <div class="voice-card-title">World-Class Voice</div>
+          <p class="voice-card-desc">A conservatoire-trained lyric tenor voice with the power and clarity to fill any space — from intimate dinners to grand concert halls.</p>
+        </div>
+        <div class="voice-card">
+          <div class="voice-card-title">Flexible Repertoire</div>
+          <p class="voice-card-desc">Opera, operetta, musical theatre, and crossover — Derek curates each programme to the event, the audience, and the occasion.</p>
+        </div>
+        <div class="voice-card">
+          <div class="voice-card-title">Seamless Professionalism</div>
+          <p class="voice-card-desc">Minimal setup, full equipment provided, and years of experience ensuring the performance integrates perfectly with your event.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STAGE PHOTO -->
+  <div class="stage-hero">
+    <img src="images/stage-solo.jpg" alt="Derek Rue on stage" />
+  </div>
+
+  <!-- CTA -->
+  <section class="cta-bg">
+    <h2>Ready to bring something<br><span>unforgettable</span> to your event?</h2>
+    <p>No obligation — just a conversation about what Derek can bring to your occasion.</p>
+    <a href="index.html#contact" class="btn">Check Availability</a>
+  </section>
+
+  <footer>
+    <div class="logo">Opera <span>Lux</span> Events</div>
+    <p>© 2026 Opera Lux Events · Germany &amp; Europe</p>
+  </footer>
+
+</body>
+</html>
