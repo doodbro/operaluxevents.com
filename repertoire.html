@@ -57,13 +57,8 @@
     .section { padding: 6rem 2rem; }
     .section-inner { max-width: 1000px; margin: 0 auto; }
 
-    /* Category tabs */
-    .cat-tabs { display: flex; gap: 0; border-bottom: 1px solid var(--grey-light); margin-bottom: 4rem; overflow-x: auto; }
-    .cat-tab { font-size: 0.7rem; font-weight: 400; letter-spacing: 0.15em; text-transform: uppercase; color: var(--grey); padding: 1rem 2rem; cursor: pointer; border-bottom: 2px solid transparent; margin-bottom: -1px; transition: color 0.3s, border-color 0.3s; white-space: nowrap; }
-    .cat-tab.active, .cat-tab:hover { color: var(--black); border-bottom-color: var(--gold); }
-
-    .cat-section { display: none; }
-    .cat-section.active { display: block; }
+    .cat-section { display: block; padding-bottom: 5rem; }
+    .cat-divider { width: 40px; height: 1px; background: var(--gold); margin: 0 0 5rem; opacity: 0.4; }
 
     .cat-header { margin-bottom: 3rem; }
     .cat-header h2 { font-family: var(--serif); font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 300; line-height: 1.2; margin-bottom: 0.75rem; }
@@ -123,7 +118,7 @@
       <a href="about.html">About</a>
       <a href="gallery.html">Gallery</a>
       <a href="repertoire.html" class="active">Repertoire</a>
-      <a href="testimonials.html">Reviews</a>
+
     </div>
     <a class="nav-cta" href="index.html#contact">Book an Event</a>
   </nav>
@@ -139,15 +134,8 @@
   <section class="section" style="background: var(--cream);">
     <div class="section-inner">
 
-      <div class="cat-tabs">
-        <div class="cat-tab active" onclick="showCat('opera', this)">Opera</div>
-        <div class="cat-tab" onclick="showCat('operetta', this)">Operetta</div>
-        <div class="cat-tab" onclick="showCat('musical', this)">Musical Theatre</div>
-        <div class="cat-tab" onclick="showCat('crossover', this)">Crossover</div>
-      </div>
-
       <!-- OPERA -->
-      <div class="cat-section active" id="opera">
+      <div class="cat-section" id="opera">
         <div class="cat-header">
           <p class="section-label">Opera</p>
           <h2>Mozart, Puccini, Verdi<br>and the great tradition.</h2>
@@ -168,6 +156,8 @@
         <p class="cat-note">Selection shown. Full aria list available on request.</p>
       </div>
 
+      <div class="cat-divider"></div>
+
       <!-- OPERETTA -->
       <div class="cat-section" id="operetta">
         <div class="cat-header">
@@ -187,6 +177,8 @@
         </div>
         <p class="cat-note">Selection shown. Full operetta list available on request.</p>
       </div>
+
+      <div class="cat-divider"></div>
 
       <!-- MUSICAL THEATRE -->
       <div class="cat-section" id="musical">
@@ -209,6 +201,8 @@
         </div>
         <p class="cat-note">Selection shown. Full list available on request.</p>
       </div>
+
+      <div class="cat-divider"></div>
 
       <!-- CROSSOVER -->
       <div class="cat-section" id="crossover">
@@ -256,14 +250,6 @@
     <p>© 2026 Opera Lux Events · Germany &amp; Europe</p>
   </footer>
 
-  <script>
-    function showCat(id, tab) {
-      document.querySelectorAll('.cat-section').forEach(s => s.classList.remove('active'));
-      document.querySelectorAll('.cat-tab').forEach(t => t.classList.remove('active'));
-      document.getElementById(id).classList.add('active');
-      tab.classList.add('active');
-    }
-  </script>
 
 </body>
 </html>
