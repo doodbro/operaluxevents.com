@@ -779,18 +779,26 @@
           <li>Retirement parties and milestones</li>
         </ul>
       </div>
-      <form class="contact-form" onsubmit="return false;">
+      <form class="contact-form" action="https://formspree.io/f/mzdorkoq" method="POST">
         <div class="form-group">
           <label for="name">Your Name</label>
-          <input type="text" id="name" placeholder="Jane Smith" />
+          <input type="text" id="name" name="name" placeholder="Jane Smith" required />
         </div>
         <div class="form-group">
           <label for="email">Email Address</label>
-          <input type="email" id="email" placeholder="jane@example.com" />
+          <input type="email" id="email" name="email" placeholder="jane@example.com" required />
         </div>
         <div class="form-group">
-          <label for="message">Tell us about your event</label>
-          <textarea id="message" placeholder="Date, venue, type of event..."></textarea>
+          <label for="event">Event Type</label>
+          <input type="text" id="event" name="event" placeholder="Wedding, Corporate Gala, Private Dinner…" required />
+        </div>
+        <div class="form-group">
+          <label for="date">Event Date</label>
+          <input type="text" id="date" name="date" placeholder="e.g. 14 September 2026" required />
+        </div>
+        <div class="form-group">
+          <label for="message">Tell me about your event</label>
+          <textarea id="message" name="message" placeholder="Venue, expected guests, anything else you'd like me to know…" required></textarea>
         </div>
         <button class="btn" type="submit">Send Enquiry</button>
       </form>
