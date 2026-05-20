@@ -89,13 +89,12 @@
     .nav-links a:hover { color: var(--black); }
 
     .hero {
-      min-height: 100vh;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       text-align: center;
-      padding: 8rem 2rem 4rem;
+      padding: 10rem 2rem 5rem;
       position: relative;
       overflow: hidden;
     }
@@ -196,26 +195,16 @@
       .short-frame { padding-top: 56.25%; }
     }
 
-    .scroll-hint {
-      font-size: 0.65rem;
-      letter-spacing: 0.2em;
-      text-transform: uppercase;
-      color: var(--grey);
-      opacity: 0;
-      animation: fadeUp 0.8s ease forwards 1s;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0.5rem;
-    }
+    .videos-more { margin-top: 1.25rem; opacity: 0; animation: fadeUp 0.8s ease forwards 1s; }
+    .videos-more a { font-size: 0.68rem; font-weight: 500; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); text-decoration: none; border-bottom: 1px solid rgba(184,150,62,0.4); padding-bottom: 2px; transition: border-color 0.3s; }
+    .videos-more a:hover { border-color: var(--gold); }
 
-    .scroll-hint::after {
-      content: '';
-      display: block;
-      width: 1px;
-      height: 40px;
-      background: linear-gradient(to bottom, var(--grey), transparent);
-    }
+    /* Credibility strip */
+    .cred-strip { background: var(--black); padding: 0.9rem 2rem; border-bottom: 1px solid rgba(255,255,255,0.06); }
+    .cred-inner { max-width: 1000px; margin: 0 auto; display: flex; gap: 0; justify-content: center; align-items: center; flex-wrap: wrap; }
+    .cred-inner span { font-size: 0.62rem; font-weight: 400; letter-spacing: 0.16em; text-transform: uppercase; color: rgba(255,255,255,0.38); padding: 0 1rem; }
+    .cred-inner span.cred-sep { color: var(--gold); opacity: 0.5; padding: 0; font-size: 0.55rem; }
+    @media (max-width: 768px) { .cred-inner { gap: 0.5rem; } .cred-inner span { padding: 0 0.5rem; } }
 
     .section { padding: 7rem 2rem; }
     .section-inner { max-width: 1000px; margin: 0 auto; }
@@ -623,9 +612,9 @@
 
   <!-- HERO -->
   <section class="hero">
-    <p class="hero-tag">Live Opera · Musical Theatre · Operetta · Crossover</p>
-    <h1>Are you tired of the same <em>forgettable</em> entertainment?</h1>
-    <p class="hero-sub">No more cover bands playing Wonderwall. No more awkward crooners singing My Way. Opera Lux Events brings world-class opera and musical theater performance directly to your event, something your guests will never forget.</p>
+    <p class="hero-tag">Principal Singer · Theater Trier · Germany &amp; Europe</p>
+    <h1>Live opera for your<br><em>restaurant, hotel, or gala.</em></h1>
+    <p class="hero-sub">Derek Rue performs at private dinners, corporate events, embassy receptions, and weddings across Germany and Europe. One singer, full orchestral sound — and something your guests are still talking about the next morning.</p>
 
     <!-- VIDEOS -->
     <div class="videos-wrap">
@@ -651,8 +640,23 @@
       </div>
     </div>
 
-    <p class="scroll-hint">Discover more</p>
+    <div class="videos-more"><a href="gallery.html">Watch more performances →</a></div>
   </section>
+
+  <!-- CREDIBILITY STRIP -->
+  <div class="cred-strip">
+    <div class="cred-inner">
+      <span>Principal Singer · Theater Trier</span>
+      <span class="cred-sep">·</span>
+      <span>Universität Mozarteum Salzburg</span>
+      <span class="cred-sep">·</span>
+      <span>15+ Years on Stage</span>
+      <span class="cred-sep">·</span>
+      <span>200+ Events</span>
+      <span class="cred-sep">·</span>
+      <span>Germany &amp; Europe</span>
+    </div>
+  </div>
 
   <!-- ABOUT -->
   <section class="section">
@@ -660,11 +664,11 @@
       <p class="section-label">About</p>
       <div class="about-grid">
         <div class="about-photo">
-          <img src="images/headshot-clean.png" alt="Derek Rue, Lyric Tenor" />
+          <img src="images/headshot-clean.png" alt="Derek Rue, Opera Singer" />
         </div>
         <div class="about-text">
-          <p>Derek Rue is a professional opera singer and lyric tenor based in Trier, Germany, with <strong>fifteen years of stage experience</strong> performing across Germany and Europe. A graduate of the <strong>Universität Mozarteum Salzburg</strong>, Derek brings the full power of the operatic tradition into modern venues with warmth, presence, and a genuine connection with his audience.</p>
-          <p>From intimate birthday celebrations to corporate galas, retirement parties, cultural events, and embassy functions, Derek delivers a performance that is powerful, personal, and completely unforgettable.</p>
+          <p>Derek Rue is a professional opera singer based in Trier, Germany. A <strong>principal singer at Theater Trier</strong> and graduate of the <strong>Universität Mozarteum Salzburg</strong>, he brings fifteen years of stage experience to private events, corporate galas, embassy receptions, and hotel evenings across Germany and Europe.</p>
+          <p>Every performance is live — no lip-sync, no shortcuts. Songs people know, sung with the full power of a trained opera voice and professional orchestral backing.</p>
         </div>
       </div>
     </div>
@@ -770,6 +774,7 @@
         <p class="section-label">Book an Event</p>
         <h2>Check availability for your event.</h2>
         <p>Get in touch to discuss your event. No obligation, just a conversation about what Derek can bring to your occasion.</p>
+        <p style="font-size:0.82rem; color:var(--grey); margin-bottom:1.5rem;">Or email directly: <a href="mailto:agency@operaluxevents.com" style="color:var(--gold); text-decoration:none; border-bottom:1px solid rgba(184,150,62,0.4); padding-bottom:1px;">agency@operaluxevents.com</a></p>
         <ul class="contact-events">
           <li>Corporate galas and company events</li>
           <li>Weddings and private celebrations</li>
