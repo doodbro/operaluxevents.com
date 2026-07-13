@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Performances &amp; Press · Opera Lux Events</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@300;400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --cream: #faf8f4;
+      --white: #ffffff;
+      --black: #0d0d0d;
+      --gold: #b8963e;
+      --gold-light: #d4b26a;
+      --grey: #6b6b6b;
+      --grey-light: #e8e4de;
+      --serif: 'Cormorant Garamond', Georgia, serif;
+      --sans: 'Jost', sans-serif;
+    }
+    html { scroll-behavior: smooth; }
+    body { font-family: var(--sans); background: var(--cream); color: var(--black); font-weight: 300; overflow-x: hidden; }
+
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 1.5rem 4rem;
+      background: rgba(250,248,244,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--grey-light);
+    }
+    .nav-logo { font-family: var(--serif); font-size: 1.3rem; font-weight: 400; letter-spacing: 0.08em; color: var(--black); text-decoration: none; }
+    .nav-logo span { color: var(--gold); }
+    .nav-links { display: flex; gap: 2.5rem; align-items: center; }
+    .nav-links a { font-family: var(--sans); font-size: 0.7rem; font-weight: 400; letter-spacing: 0.15em; text-transform: uppercase; color: var(--grey); text-decoration: none; transition: color 0.3s; }
+    .nav-links a:hover, .nav-links a.active { color: var(--black); }
+    .nav-cta { font-family: var(--sans); font-size: 0.75rem; font-weight: 500; letter-spacing: 0.15em; text-transform: uppercase; color: var(--black); text-decoration: none; border-bottom: 1px solid var(--gold); padding-bottom: 2px; transition: color 0.3s; }
+    .nav-cta:hover { color: var(--gold); }
+
+    .page-hero {
+      padding: 11rem 2rem 5rem;
+      text-align: center;
+      background: var(--cream);
+      position: relative; overflow: hidden;
+    }
+    .page-hero::before {
+      content: '';
+      position: absolute; top: -10%; left: 50%; transform: translateX(-50%);
+      width: 700px; height: 700px;
+      background: radial-gradient(ellipse, rgba(184,150,62,0.07) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .section-label { font-size: 0.65rem; font-weight: 500; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.5rem; }
+    .page-hero h1 { font-family: var(--serif); font-size: clamp(3rem, 7vw, 5.5rem); font-weight: 300; line-height: 1.05; margin-bottom: 1rem; }
+    .page-hero .sub { font-size: 1rem; color: var(--grey); line-height: 1.8; max-width: 560px; margin: 0 auto; }
+
+    /* Featured / current engagement */
+    .now-wrap { background: var(--white); padding: 5rem 2rem; }
+    .now-inner { max-width: 1040px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+    .now-photo { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; filter: grayscale(0.15); }
+    .now-copy .section-label { margin-bottom: 1rem; }
+    .now-copy h2 { font-family: var(--serif); font-size: clamp(2rem, 4vw, 3rem); font-weight: 300; line-height: 1.15; margin-bottom: 1.5rem; }
+    .now-list { list-style: none; }
+    .now-item { padding: 1.5rem 0; border-top: 1px solid var(--grey-light); }
+    .now-item:last-child { border-bottom: 1px solid var(--grey-light); }
+    .now-date { font-size: 0.62rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.5rem; }
+    .now-title { font-family: var(--serif); font-size: 1.5rem; font-weight: 400; font-style: italic; line-height: 1.25; margin-bottom: 0.35rem; }
+    .now-meta { font-size: 0.85rem; color: var(--grey); line-height: 1.6; }
+
+    /* Timeline of past seasons */
+    .timeline-wrap { background: var(--cream); padding: 6rem 2rem; }
+    .timeline-inner { max-width: 900px; margin: 0 auto; }
+    .timeline-inner > .section-label { text-align: center; }
+    .timeline-inner > h2 { font-family: var(--serif); font-size: clamp(2rem, 4vw, 3rem); font-weight: 300; text-align: center; margin-bottom: 3.5rem; line-height: 1.2; }
+    .season { margin-bottom: 3rem; }
+    .season-year { font-family: var(--serif); font-size: 1.6rem; font-weight: 400; color: var(--gold); margin-bottom: 1.25rem; letter-spacing: 0.03em; }
+    .perf-row { display: grid; grid-template-columns: 1fr auto; gap: 1.5rem; align-items: baseline; padding: 0.9rem 0; border-top: 1px solid var(--grey-light); }
+    .perf-row:last-child { border-bottom: 1px solid var(--grey-light); }
+    .perf-main { }
+    .perf-work { font-family: var(--serif); font-size: 1.25rem; font-weight: 400; font-style: italic; }
+    .perf-role { font-size: 0.82rem; color: var(--grey); margin-top: 0.2rem; letter-spacing: 0.02em; }
+    .perf-venue { font-size: 0.68rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--grey); text-align: right; white-space: nowrap; }
+
+    /* Press band */
+    .press-wrap { background: var(--black); padding: 6rem 2rem; }
+    .press-inner { max-width: 960px; margin: 0 auto; }
+    .press-inner > .section-label { text-align: center; color: var(--gold); }
+    .press-inner > h2 { font-family: var(--serif); font-size: clamp(2rem, 4vw, 3rem); font-weight: 300; text-align: center; color: var(--white); margin-bottom: 3.5rem; line-height: 1.2; }
+    .press-grid { display: grid; gap: 2rem; }
+    .press-card { border: 1px solid rgba(184,150,62,0.25); padding: 2.5rem; background: rgba(255,255,255,0.015); }
+    .press-quote { font-family: var(--serif); font-size: clamp(1.25rem, 2.6vw, 1.7rem); font-weight: 300; font-style: italic; line-height: 1.5; color: var(--white); margin-bottom: 1rem; }
+    .press-gloss { font-size: 0.9rem; color: rgba(255,255,255,0.55); line-height: 1.7; margin-bottom: 1.75rem; }
+    .press-divider { width: 32px; height: 1px; background: var(--gold); margin-bottom: 1rem; }
+    .press-src { font-size: 0.68rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold-light); }
+    .press-src span { color: rgba(255,255,255,0.4); }
+    .press-work { font-size: 0.72rem; color: rgba(255,255,255,0.4); margin-top: 0.35rem; font-style: italic; }
+
+    /* CTA */
+    .cta-bg { background: var(--cream); padding: 7rem 2rem; text-align: center; }
+    .cta-inner { max-width: 600px; margin: 0 auto; }
+    .cta-inner h2 { font-family: var(--serif); font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 300; line-height: 1.3; margin-bottom: 1rem; }
+    .cta-inner p { font-size: 0.95rem; color: var(--grey); line-height: 1.8; margin-bottom: 2.5rem; }
+    .btn { display: inline-block; font-family: var(--sans); font-size: 0.75rem; font-weight: 500; letter-spacing: 0.2em; text-transform: uppercase; color: var(--black); background: var(--gold); padding: 1.1rem 3rem; border: none; cursor: pointer; transition: background 0.3s; text-decoration: none; }
+    .btn:hover { background: var(--gold-light); }
+
+    footer { background: #080808; padding: 2rem 4rem; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid rgba(255,255,255,0.05); }
+    footer .logo { font-family: var(--serif); font-size: 1rem; color: rgba(255,255,255,0.4); }
+    footer .logo span { color: var(--gold); }
+    footer p { font-size: 0.7rem; color: rgba(255,255,255,0.2); letter-spacing: 0.1em; }
+
+    @media (max-width: 768px) {
+      nav { padding: 1.2rem 1.5rem; }
+      .nav-links { display: none; }
+      .now-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+      .now-photo { aspect-ratio: 3 / 2; }
+      .perf-row { grid-template-columns: 1fr; gap: 0.3rem; }
+      .perf-venue { text-align: left; }
+      footer { flex-direction: column; gap: 1rem; text-align: center; }
+    }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a class="nav-logo" href="index.html">Opera <span>Lux</span> Events</a>
+    <div class="nav-links">
+      <a href="about.html">About</a>
+      <a href="performances.html" class="active">Performances</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="repertoire.html">Repertoire</a>
+    </div>
+    <a class="nav-cta" href="index.html#contact">Book an Event</a>
+  </nav>
+
+  <!-- PAGE HERO -->
+  <section class="page-hero">
+    <p class="section-label">Stage &amp; Concert</p>
+    <h1>Performances &amp; Press</h1>
+    <p class="sub">A working opera singer on stage across Germany and Europe — from lead roles at Theater Trier to concert halls and private galas. Here is where Derek has sung, where he sings now, and what the critics have written.</p>
+  </section>
+
+  <!-- NOW / UPCOMING -->
+  <section class="now-wrap">
+    <div class="now-inner">
+      <img class="now-photo" src="images/stage-solo.jpg" alt="Derek Rue performing on stage" />
+      <div class="now-copy">
+        <p class="section-label">On Stage Now · 2026</p>
+        <h2>This season.</h2>
+        <ul class="now-list">
+          <li class="now-item">
+            <div class="now-date">2026 Season</div>
+            <div class="now-title">Die Entführung aus dem Serail</div>
+            <div class="now-meta">Mozart · Role of Pedrillo · Theater Trier</div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- TIMELINE -->
+  <section class="timeline-wrap">
+    <div class="timeline-inner">
+      <p class="section-label">Selected Performances</p>
+      <h2>Recent seasons.</h2>
+
+      <div class="season">
+        <div class="season-year">2024 / 25</div>
+        <div class="perf-row">
+          <div class="perf-main"><div class="perf-work">Così fan tutte</div><div class="perf-role">Mozart · Ferrando</div></div>
+          <div class="perf-venue">Theater Trier</div>
+        </div>
+        <div class="perf-row">
+          <div class="perf-main"><div class="perf-work">Ariadne auf Naxos</div><div class="perf-role">R. Strauss · Tanzmeister &amp; Brighella</div></div>
+          <div class="perf-venue">Theater Trier</div>
+        </div>
+      </div>
+
+      <div class="season">
+        <div class="season-year">2024</div>
+        <div class="perf-row">
+          <div class="perf-main"><div class="perf-work">Brokeback Mountain</div><div class="perf-role">Wuorinen · Jack Twist</div></div>
+          <div class="perf-venue">Theater Trier</div>
+        </div>
+        <div class="perf-row">
+          <div class="perf-main"><div class="perf-work">Das Liebesverbot</div><div class="perf-role">Wagner · Luzio</div></div>
+          <div class="perf-venue">Opernbühne Maxlrain Festival</div>
+        </div>
+      </div>
+
+      <div class="season">
+        <div class="season-year">2023</div>
+        <div class="perf-row">
+          <div class="perf-main"><div class="perf-work">Die Fledermaus</div><div class="perf-role">J. Strauss · Alfred</div></div>
+          <div class="perf-venue">Theater Trier</div>
+        </div>
+        <div class="perf-row">
+          <div class="perf-main"><div class="perf-work">Falstaff</div><div class="perf-role">Verdi · Fenton</div></div>
+          <div class="perf-venue">Theater Trier</div>
+        </div>
+      </div>
+
+      <div class="season">
+        <div class="season-year">2022</div>
+        <div class="perf-row">
+          <div class="perf-main"><div class="perf-work">The Rake's Progress</div><div class="perf-role">Stravinsky · Tom Rakewell (title role)</div></div>
+          <div class="perf-venue">Theater Trier</div>
+        </div>
+        <div class="perf-row">
+          <div class="perf-main"><div class="perf-work">Peter Grimes</div><div class="perf-role">Britten · Bob Boles</div></div>
+          <div class="perf-venue">Theater Trier</div>
+        </div>
+        <div class="perf-row">
+          <div class="perf-main"><div class="perf-work">Die Comedian Harmonists</div><div class="perf-role">Ari Leschnikoff</div></div>
+          <div class="perf-venue">Theater Trier</div>
+        </div>
+      </div>
+
+      <div class="season">
+        <div class="season-year">2020 – 21</div>
+        <div class="perf-row">
+          <div class="perf-main"><div class="perf-work">Die lustige Witwe</div><div class="perf-role">Lehár · Camille de Rossillon</div></div>
+          <div class="perf-venue">Theater Trier</div>
+        </div>
+        <div class="perf-row">
+          <div class="perf-main"><div class="perf-work">Il barbiere di Siviglia</div><div class="perf-role">Rossini · Conte Almaviva</div></div>
+          <div class="perf-venue">Theater Trier</div>
+        </div>
+        <div class="perf-row">
+          <div class="perf-main"><div class="perf-work">L'incoronazione di Poppea</div><div class="perf-role">Monteverdi · Lucano</div></div>
+          <div class="perf-venue">Theater Trier</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- PRESS -->
+  <section class="press-wrap">
+    <div class="press-inner">
+      <p class="section-label">In the Press</p>
+      <h2>What the critics wrote.</h2>
+      <div class="press-grid">
+
+        <div class="press-card">
+          <p class="press-quote">"Derek Rue bietet für die Titelpartie seinen ebenso schlanken wie wendigen Tenor auf."</p>
+          <p class="press-gloss">"Derek Rue lends the title role a voice as sleek as it is agile."</p>
+          <div class="press-divider"></div>
+          <p class="press-src">Michael Kaminski <span>· Die Deutsche Bühne · 11 Sept 2022</span></p>
+          <p class="press-work">The Rake's Progress · Theater Trier</p>
+        </div>
+
+        <div class="press-card">
+          <p class="press-quote">"…nicht überrascht, dass … v.a. Opern-Ensemble-Mitglied Derek Rue stimmlich herausragen."</p>
+          <p class="press-gloss">"…no surprise that, above all, opera-ensemble member Derek Rue stands out vocally."</p>
+          <div class="press-divider"></div>
+          <p class="press-src">Alexander Scheidweiler <span>· lokalo.de · 18 Dec 2022</span></p>
+          <p class="press-work">Die Comedian Harmonists · Theater Trier</p>
+        </div>
+
+        <div class="press-card">
+          <p class="press-quote">"Tenor Derek Rue in der Rolle des Jack Twist … ist der agile, redselige Rodeo-Reiter."</p>
+          <p class="press-gloss">"Tenor Derek Rue in the role of Jack Twist … is the agile, talkative rodeo rider."</p>
+          <div class="press-divider"></div>
+          <p class="press-src">Ursula Hartlapp-Lindemeyer <span>· Das Opernmagazin · 24 Apr 2024</span></p>
+          <p class="press-work">Brokeback Mountain · Theater Trier</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta-bg">
+    <div class="cta-inner">
+      <p class="section-label">Book Derek</p>
+      <h2>Bring the opera stage<br>to your own event.</h2>
+      <p>The same voice heard on Germany's opera stages, brought to your dinner, gala, or private celebration. Get in touch to check availability — no obligation, just a conversation.</p>
+      <a href="index.html#contact" class="btn">Check Availability</a>
+    </div>
+  </section>
+
+  <footer>
+    <div class="logo">Opera <span>Lux</span> Events</div>
+    <p>© 2026 Opera Lux Events · Germany &amp; Europe</p>
+  </footer>
+
+</body>
+</html>
