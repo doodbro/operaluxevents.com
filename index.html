@@ -178,7 +178,7 @@
       overflow: hidden;
       box-shadow: 0 20px 60px rgba(0,0,0,0.15);
     }
-    .main-frame iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
+    .main-frame iframe, .main-frame video { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; object-fit: cover; }
 
     .video-label {
       font-size: 0.62rem;
@@ -631,13 +631,9 @@
       </div>
       <div class="video-main">
         <div class="main-frame">
-          <iframe src="https://www.youtube.com/embed/cOwJhvGLqI4?start=60"
-            title="Derek Rue · Live at the Event"
-            frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            allowfullscreen></iframe>
+          <video src="videos/opera-lux-porta-nigra.mp4" controls playsinline preload="metadata"></video>
         </div>
-        <p class="video-label">Live at the Event</p>
+        <p class="video-label">Time to Say Goodbye · Live at Porta Nigra</p>
       </div>
     </div>
 
