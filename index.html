@@ -447,6 +447,14 @@
       position: relative;
     }
 
+    /* Fair questions */
+    .faq-bg { background: var(--white); padding: 7rem 2rem; }
+    .faq-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+    .faq-card { border: 1px solid var(--grey-light); padding: 2.5rem; transition: border-color 0.3s; }
+    .faq-card:hover { border-color: var(--gold); }
+    .faq-q { font-family: var(--serif); font-size: 1.35rem; font-weight: 400; font-style: italic; line-height: 1.35; color: var(--black); margin-bottom: 1rem; }
+    .faq-a { font-size: 0.92rem; color: var(--grey); line-height: 1.8; }
+
     .details-wrap { background: var(--white); padding: 5rem 2rem; }
 
     .details-grid {
@@ -592,7 +600,7 @@
     @media (max-width: 768px) {
       nav { padding: 1.2rem 1.5rem; }
       .about-grid, .duo-inner, .contact-inner { grid-template-columns: 1fr; gap: 2.5rem; }
-      .formats-grid, .rep-grid, .details-grid { grid-template-columns: 1fr; }
+      .formats-grid, .rep-grid, .details-grid, .faq-grid { grid-template-columns: 1fr; }
       footer { flex-direction: column; gap: 1rem; text-align: center; }
     }
   </style>
@@ -745,6 +753,32 @@
     <p class="statement-sub">A live opera voice, in the same room as your guests.</p>
   </section>
 
+  <!-- FAIR QUESTIONS -->
+  <section class="faq-bg">
+    <div class="section-inner">
+      <p class="section-label">Fair Questions</p>
+      <h2>What venue owners<br>ask me before booking.</h2>
+      <div class="faq-grid">
+        <div class="faq-card">
+          <p class="faq-q">"Isn't opera too highbrow for our guests?"</p>
+          <p class="faq-a">The guests who've never been near an opera house are the ones who react most. Nobody needs to know the repertoire or the language. A live voice at full power, a few metres away, lands on its own.</p>
+        </div>
+        <div class="faq-card">
+          <p class="faq-q">"We don't have a stage."</p>
+          <p class="faq-a">Neither do most of the places I sing. Dining rooms, terraces, courtyards. A voice and a room is the whole format. I bring the equipment, and setup takes minutes, not hours.</p>
+        </div>
+        <div class="faq-card">
+          <p class="faq-q">"We tried live music once. It just faded into the background."</p>
+          <p class="faq-a">Background music is built to be ignored. This is the opposite. When the first aria starts, conversations end on their own, and the room turns. It becomes the moment of the evening, not the soundtrack behind it.</p>
+        </div>
+        <div class="faq-card">
+          <p class="faq-q">"Our regulars come for calm evenings."</p>
+          <p class="faq-a">So we plan for that. We build the set together: when I sing, for how long, how the evening breathes between pieces. It's a hosted moment inside your evening, not an interruption of it.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- DETAILS -->
   <div class="details-wrap">
     <p class="section-label" style="text-align:center; margin-bottom:2rem;">Performance Details</p>
@@ -770,7 +804,7 @@
       <div class="contact-left">
         <p class="section-label">Book an Event</p>
         <h2>Tell me about your evening.</h2>
-        <p>Send the date, the venue, and roughly how many guests. I reply personally, usually within a day, often with a first idea for the program. No obligation, just a conversation.</p>
+        <p>Send the date, the venue, and roughly how many guests. I reply personally, usually within a day, often with a first idea for the program. Formats scale from a single set during dinner to a full gala evening, so before you rule anything out on budget, it's worth one conversation. No obligation.</p>
         <p style="font-size:0.82rem; color:var(--grey); margin-bottom:1.5rem;">Or email directly: <a href="mailto:agency@operaluxevents.com" style="color:var(--gold); text-decoration:none; border-bottom:1px solid rgba(184,150,62,0.4); padding-bottom:1px;">agency@operaluxevents.com</a></p>
         <ul class="contact-events">
           <li>Corporate galas and company events</li>
