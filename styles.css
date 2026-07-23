@@ -765,6 +765,17 @@ body.intro-lock { overflow: hidden; height: 100vh; }
 .press-work { font-size: 0.74rem; color: var(--muted); margin-top: 0.35rem; }
 .press-tr { font-style: italic; letter-spacing: 0; text-transform: none; color: var(--muted); opacity: 0.8; }
 
+/* ---------- Homepage compact press strip ---------- */
+.pressbar { background: var(--bg2); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); padding: 3.4rem 2rem; }
+.pressbar-inner { max-width: 1080px; margin: 0 auto; text-align: center; }
+.pressbar-inner .section-label { display: block; margin-bottom: 1.8rem; }
+.pressbar-quotes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2.2rem; align-items: start; }
+.pressbar-q { margin: 0; font-family: var(--serif); font-size: clamp(1.05rem, 1.7vw, 1.35rem); font-style: italic; line-height: 1.45; color: var(--ink); }
+.pressbar-q cite { display: block; margin-top: 0.8rem; font-family: var(--sans); font-style: normal; font-size: 0.64rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold-light); }
+.pressbar-link { display: inline-block; margin-top: 2rem; font-family: var(--sans); font-size: 0.72rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold-light); text-decoration: none; border-bottom: 1px solid transparent; transition: border-color 0.3s; }
+.pressbar-link:hover { border-bottom-color: var(--gold-light); }
+@media (max-width: 720px) { .pressbar-quotes { grid-template-columns: 1fr; gap: 1.8rem; } }
+
 /* ---------- Repertoire page ---------- */
 .cat-section { display: block; padding-bottom: 5rem; }
 .cat-divider { width: 60px; height: 1px; background: linear-gradient(90deg, var(--gold), transparent); margin: 0 0 5rem; opacity: 0.6; }
