@@ -12,6 +12,15 @@
 </head>
 <body>
 
+  <!-- CINEMATIC INTRO (plays once on load, no sound) -->
+  <div class="brand-intro" id="brandIntro" role="dialog" aria-label="Opera Lux Events intro">
+    <video class="brand-intro-video" id="brandIntroVideo" muted playsinline preload="auto" poster="brand/hero-loop-poster.jpg">
+      <source src="brand/hero-loop.mp4" type="video/mp4" />
+    </video>
+    <div class="brand-intro-vignette" aria-hidden="true"></div>
+    <button class="brand-intro-skip" id="brandIntroSkip" type="button">Skip intro</button>
+  </div>
+
   <nav>
     <a class="nav-logo brand-lockup" href="index.html" aria-label="Opera Lux Events"><span class="bl-main">Opera Lux</span><span class="bl-rule" aria-hidden="true"></span><span class="bl-sub">Events</span></a>
     <div class="nav-links">
@@ -23,18 +32,6 @@
     </div>
     <a class="nav-cta" href="#contact">Book an Event</a>
   </nav>
-
-  <!-- CINEMATIC BRAND HERO -->
-  <section class="brand-hero" aria-label="Opera Lux Events">
-    <video class="brand-hero-video" autoplay muted loop playsinline preload="metadata" poster="brand/hero-loop-poster.jpg">
-      <source src="brand/hero-loop.mp4" type="video/mp4" />
-    </video>
-    <div class="brand-hero-fade" aria-hidden="true"></div>
-    <a class="brand-hero-scroll" href="#pitch" aria-label="Scroll to content">
-      <span>Enter</span>
-      <span class="bhs-arrow" aria-hidden="true"></span>
-    </a>
-  </section>
 
   <!-- HERO -->
   <section class="hero" id="pitch">

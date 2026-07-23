@@ -5,6 +5,40 @@
 
   var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+  /* Cinematic intro: play once, then dissolve into the site */
+  (function () {
+    var intro = document.getElementById('brandIntro');
+    if (!intro) return;
+    var video = document.getElementById('brandIntroVideo');
+    var skip = document.getElementById('brandIntroSkip');
+
+    if (reduced) { intro.parentNode && intro.parentNode.removeChild(intro); return; }
+
+    var dismissed = false;
+    document.body.classList.add('intro-lock');
+
+    function dismiss() {
+      if (dismissed) return;
+      dismissed = true;
+      intro.classList.add('intro-out');
+      document.body.classList.remove('intro-lock');
+      window.scrollTo(0, 0);
+      setTimeout(function () { intro.parentNode && intro.parentNode.removeChild(intro); }, 1200);
+    }
+
+    if (video) {
+      var play = video.play();
+      if (play && play.catch) { play.catch(function () { /* autoplay blocked: still dismiss on timer */ }); }
+      video.addEventListener('ended', dismiss);
+      /* safety net if 'ended' never fires */
+      setTimeout(dismiss, 6400);
+    } else {
+      setTimeout(dismiss, 3000);
+    }
+    if (skip) skip.addEventListener('click', dismiss);
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') dismiss(); });
+  })();
+
   /* Nav: solidify on scroll */
   var nav = document.querySelector('nav');
   function onScroll() {
