@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2400" height="1400" viewBox="0 0 2400 1400">
+  
+  
+  <text x="1200" y="600" text-anchor="middle" font-family="Cinzel, Trajan Pro, Bodoni 72 Smallcaps, serif" font-size="205" letter-spacing="42" fill="#C8A45A">OPERA LUX</text>
+  <line x1="510" y1="815" x2="930" y2="815" stroke="#C8A45A" stroke-width="6"/>
+  <line x1="1470" y1="815" x2="1890" y2="815" stroke="#C8A45A" stroke-width="6"/>
+  <text x="1200" y="835" text-anchor="middle" font-family="Cinzel, Trajan Pro, Bodoni 72 Smallcaps, serif" font-size="74" letter-spacing="56" fill="#C8A45A">EVENTS</text>
+  <path d="M1200 945 L1222 987 L1264 1009 L1222 1031 L1200 1073 L1178 1031 L1136 1009 L1178 987 Z" fill="#C8A45A"/>
+</svg>
