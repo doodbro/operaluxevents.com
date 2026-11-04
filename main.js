@@ -1,96 +1,87 @@
-/* Opera Lux — stage motion. Hand-rolled, no libraries.
-   Respects prefers-reduced-motion; degrades to static content. */
+/* Opera Lux Events: accessible navigation, opt-in video and enquiry handling. */
 (function () {
   'use strict';
-
-  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  /* Cinematic intro: play once, then dissolve into the site */
-  (function () {
-    var intro = document.getElementById('brandIntro');
-    if (!intro) return;
-    var video = document.getElementById('brandIntroVideo');
-    var skip = document.getElementById('brandIntroSkip');
-
-    if (reduced) { intro.parentNode && intro.parentNode.removeChild(intro); return; }
-
-    var dismissed = false;
-    document.body.classList.add('intro-lock');
-
-    function dismiss() {
-      if (dismissed) return;
-      dismissed = true;
-      intro.classList.add('intro-out');
-      document.body.classList.remove('intro-lock');
-      window.scrollTo(0, 0);
-      setTimeout(function () { intro.parentNode && intro.parentNode.removeChild(intro); }, 1200);
-    }
-
-    if (video) {
-      var play = video.play();
-      if (play && play.catch) { play.catch(function () { /* autoplay blocked: still dismiss on timer */ }); }
-      video.addEventListener('ended', dismiss);
-      /* safety net if 'ended' never fires */
-      setTimeout(dismiss, 6400);
-    } else {
-      setTimeout(dismiss, 3000);
-    }
-    if (skip) skip.addEventListener('click', dismiss);
-    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') dismiss(); });
-  })();
-
-  /* Nav: solidify on scroll */
   var nav = document.querySelector('nav');
-  function onScroll() {
-    if (nav) nav.classList.toggle('scrolled', window.scrollY > 24);
+  var menu = document.querySelector('.menu-toggle');
+  function closeMenu() {
+    if (!menu || !nav) return;
+    menu.setAttribute('aria-expanded', 'false');
+    nav.classList.remove('menu-open');
   }
-  window.addEventListener('scroll', onScroll, { passive: true });
-  onScroll();
-
-  if (reduced) return;
-
-  /* Scroll reveal */
-  var revealSelectors = [
-    '.format-card', '.faq-card', '.training-card', '.voice-card', '.t-card',
-    '.press-card', '.rep-item', '.detail-item', '.stat-item', '.now-item',
-    '.photo-slot', '.video-slot', '.venue-slot', '.song-grid', '.cat-header',
-    '.about-photo', '.about-text', '.bio-photo', '.bio-text', '.now-photo',
-    '.duo-accent', '.duo-text', '.season', '.featured-inner',
-    '.statement-main', '.statement-sub', '.contact-left', '.contact-form',
-    '.cta-inner', '.insta-inner', '.coming-soon-block'
-  ].join(',');
-
-  var items = Array.prototype.slice.call(document.querySelectorAll(revealSelectors));
-  if ('IntersectionObserver' in window && items.length) {
-    items.forEach(function (el, i) {
-      el.classList.add('reveal');
-      el.style.transitionDelay = (i % 4) * 70 + 'ms';
+  if (nav && menu) {
+    nav.classList.add('has-menu');
+    menu.addEventListener('click', function () {
+      var open = menu.getAttribute('aria-expanded') !== 'true';
+      menu.setAttribute('aria-expanded', String(open));
+      nav.classList.toggle('menu-open', open);
     });
-    var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('in');
-          io.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
-    items.forEach(function (el) { io.observe(el); });
+    nav.querySelectorAll('a').forEach(function (link) { link.addEventListener('click', closeMenu); });
+    document.addEventListener('keydown', function (event) {
+      if (event.key === 'Escape' && menu.getAttribute('aria-expanded') === 'true') {
+        closeMenu(); menu.focus();
+      }
+    });
+    window.addEventListener('resize', function () { if (window.innerWidth > 1000) closeMenu(); });
+    function onScroll() { nav.classList.toggle('scrolled', window.scrollY > 24); }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
   }
 
-  /* Gentle 3D tilt on cards (fine pointers only) */
-  if (window.matchMedia('(pointer: fine)').matches) {
-    var tiltSelectors = '.format-card,.faq-card,.training-card,.voice-card,.t-card,.press-card,.rep-item,.detail-item,.stat-item';
-    Array.prototype.slice.call(document.querySelectorAll(tiltSelectors)).forEach(function (card) {
-      card.classList.add('tiltable');
-      card.addEventListener('pointermove', function (e) {
-        var r = card.getBoundingClientRect();
-        var px = (e.clientX - r.left) / r.width - 0.5;
-        var py = (e.clientY - r.top) / r.height - 0.5;
-        card.style.transform = 'perspective(900px) rotateX(' + (-py * 5) + 'deg) rotateY(' + (px * 6) + 'deg) translateY(-4px)';
-      });
-      card.addEventListener('pointerleave', function () {
-        card.style.transform = '';
-      });
+  document.querySelectorAll('[data-youtube]').forEach(function (link) {
+    link.addEventListener('click', function (event) {
+      event.preventDefault();
+      var iframe = document.createElement('iframe');
+      iframe.src = 'https://www.youtube-nocookie.com/embed/' + encodeURIComponent(link.dataset.youtube) + '?autoplay=1';
+      iframe.title = 'Derek Rue: featured live performance on YouTube';
+      iframe.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
+      iframe.allowFullscreen = true;
+      iframe.referrerPolicy = 'strict-origin-when-cross-origin';
+      iframe.className = 'activated-player';
+      link.replaceWith(iframe);
+      iframe.focus();
     });
-  }
+  });
+
+  var form = document.querySelector('.contact-form');
+  if (!form) return;
+  var date = document.getElementById('date');
+  var today = new Date();
+  if (date) date.min = today.getFullYear() + '-' + String(today.getMonth() + 1).padStart(2, '0') + '-' + String(today.getDate()).padStart(2, '0');
+  if (!window.fetch || !window.FormData || !window.AbortController) return;
+  var pending = false;
+  var status = document.getElementById('form-status');
+  var button = form.querySelector('button[type="submit"]');
+  form.addEventListener('submit', async function (event) {
+    event.preventDefault();
+    if (pending || !form.reportValidity()) return;
+    if (form.elements._gotcha.value) return;
+    pending = true;
+    button.disabled = true;
+    button.textContent = 'Sending enquiry...';
+    form.setAttribute('aria-busy', 'true');
+    status.textContent = 'Sending your enquiry.';
+    status.className = 'form-status';
+    var controller = new AbortController();
+    var timer = window.setTimeout(function () { controller.abort(); }, 15000);
+    try {
+      var response = await fetch(form.action, {
+        method: 'POST', body: new FormData(form), headers: { Accept: 'application/json' }, signal: controller.signal
+      });
+      var data = await response.json().catch(function () { return null; });
+      if (!response.ok || !data || data.ok !== true) throw new Error('Submission not confirmed');
+      form.reset();
+      status.textContent = 'Thank you. Your enquiry has been submitted. Derek will reply to the email address you provided. Your date is not reserved until the booking is confirmed.';
+      status.classList.add('success');
+    } catch (error) {
+      status.textContent = 'We could not confirm delivery. Your details are still here. Please try again later or email agency@operaluxevents.com directly.';
+      status.classList.add('error');
+    } finally {
+      window.clearTimeout(timer);
+      pending = false;
+      button.disabled = false;
+      button.textContent = 'Send enquiry';
+      form.removeAttribute('aria-busy');
+      status.focus();
+    }
+  });
 })();

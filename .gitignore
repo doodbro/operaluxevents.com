@@ -21,3 +21,7 @@ GMT*
 google*
 enterprise*
 history*
+
+# Site discovery assets are intentional.
+!sitemap.xml
+!robots.txt

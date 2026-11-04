@@ -1,9 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <script>document.documentElement.classList.add('js');</script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Performances &amp; Press · Opera Lux Events</title>
+  <title>Derek Rue: Performances &amp; Press | Opera Lux Events</title>
+  <meta name="description" content="Explore Derek Rue’s stage credits and independently published press reviews. Hear the experience behind your Opera Lux event in Luxembourg or Germany." />
+  <meta name="theme-color" content="#0D0D0F" />
+  <link rel="canonical" href="https://operaluxevents.com/performances.html" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Opera Lux Events" />
+  <meta property="og:locale" content="en_GB" />
+  <meta property="og:title" content="Derek Rue: Performances &amp; Press | Opera Lux Events" />
+  <meta property="og:description" content="Explore Derek Rue’s stage credits and independently published press reviews. Hear the experience behind your Opera Lux event in Luxembourg or Germany." />
+  <meta property="og:url" content="https://operaluxevents.com/performances.html" />
+  <meta property="og:image" content="https://operaluxevents.com/brand/social-card.jpg" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta property="og:image:alt" content="Opera Lux Events: live opera for events in Luxembourg and Germany. Derek Rue performing live." />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Derek Rue: Performances &amp; Press | Opera Lux Events" />
+  <meta name="twitter:description" content="Explore Derek Rue’s stage credits and independently published press reviews. Hear the experience behind your Opera Lux event in Luxembourg or Germany." />
+  <meta name="twitter:image" content="https://operaluxevents.com/brand/social-card.jpg" />
+  <script type="application/ld+json">{"@context": "https://schema.org", "@graph": [{"@type": ["PerformingGroup", "LocalBusiness"], "@id": "https://operaluxevents.com/#organisation", "name": "Opera Lux Events", "url": "https://operaluxevents.com/", "email": "agency@operaluxevents.com", "description": "Live opera, operetta, musical theatre and crossover for corporate events, galas and private celebrations.", "image": "https://operaluxevents.com/brand/social-card.jpg", "areaServed": [{"@type": "Country", "name": "Luxembourg"}, {"@type": "Country", "name": "Germany"}], "founder": {"@id": "https://operaluxevents.com/#derek-rue"}, "sameAs": ["https://www.instagram.com/operaluxevents/"], "hasOfferCatalog": {"@type": "OfferCatalog", "name": "Live performances for events", "itemListElement": [{"@type": "Offer", "url": "https://operaluxevents.com/#contact", "itemOffered": {"@type": "Service", "name": "Corporate gala and reception performance", "serviceType": "Live musical performance", "provider": {"@id": "https://operaluxevents.com/#organisation"}}}, {"@type": "Offer", "url": "https://operaluxevents.com/#contact", "itemOffered": {"@type": "Service", "name": "Restaurant, hotel and wedding performance", "serviceType": "Live musical performance", "provider": {"@id": "https://operaluxevents.com/#organisation"}}}, {"@type": "Offer", "url": "https://operaluxevents.com/#contact", "itemOffered": {"@type": "Service", "name": "Concert programme", "serviceType": "Live musical performance", "provider": {"@id": "https://operaluxevents.com/#organisation"}}}, {"@type": "Offer", "url": "https://operaluxevents.com/#contact", "itemOffered": {"@type": "Service", "name": "Duo performance upon request", "serviceType": "Live musical performance", "provider": {"@id": "https://operaluxevents.com/#organisation"}}}]}}, {"@type": "Person", "@id": "https://operaluxevents.com/#derek-rue", "name": "Derek Rue", "jobTitle": "Opera singer", "url": "https://operaluxevents.com/about.html"}, {"@type": "WebPage", "@id": "https://operaluxevents.com/performances.html#webpage", "url": "https://operaluxevents.com/performances.html", "name": "Derek Rue: Performances & Press | Opera Lux Events", "description": "Explore Derek Rue’s stage credits and independently published press reviews. Hear the experience behind your Opera Lux event in Luxembourg or Germany.", "inLanguage": "en", "about": {"@id": "https://operaluxevents.com/#organisation"}}]}</script>
   <link rel="icon" type="image/png" href="brand/favicon-512.png"/>
   <link rel="apple-touch-icon" href="brand/favicon-512.png"/>
   <link rel="preload" as="font" type="font/woff2" href="fonts/cinzel-600.woff2" crossorigin/>
@@ -11,17 +30,21 @@
   <link rel="stylesheet" href="styles.css"/>
 </head>
 <body>
+  <a class="skip-link" href="#main">Skip to content</a>
 
-  <nav>
-    <a class="nav-logo brand-lockup" href="index.html" aria-label="Opera Lux Events"><span class="bl-main">Opera Lux</span><span class="bl-rule" aria-hidden="true"></span><span class="bl-sub">Events</span></a>
-    <div class="nav-links">
+  <nav aria-label="Main navigation">
+    <a class="nav-logo brand-lockup" href="index.html" aria-label="Opera Lux Events"><span class="bl-main">Opera Lux</span><span class="bl-rule" aria-hidden="true"></span> <span class="bl-sub">Events</span></a>
+    <button class="menu-toggle" type="button" aria-expanded="false" aria-controls="navLinks">Menu</button>
+    <div class="nav-links" id="navLinks">
       <a href="about.html">About</a>
-      <a href="performances.html" class="active">Performances</a>
+      <a href="performances.html" class="active" aria-current="page">Performances</a>
       <a href="gallery.html">Gallery</a>
       <a href="repertoire.html">Repertoire</a>
     </div>
-    <a class="nav-cta" href="index.html#contact">Book an Event</a>
+    <a class="nav-cta" href="index.html#contact"><span class="cta-wide">Check availability</span><span class="cta-short">Check date</span></a>
   </nav>
+
+  <main id="main">
 
   <!-- PAGE HERO -->
   <section class="page-hero">
@@ -33,10 +56,10 @@
   <!-- NOW / UPCOMING -->
   <section class="now-wrap">
     <div class="now-inner">
-      <img class="now-photo" src="images/stage-solo.jpg" alt="Derek Rue performing on stage" />
+      <picture><source type="image/webp" srcset="images/optimised/stage-solo-640.webp 640w, images/optimised/stage-solo-1200.webp 1200w, images/optimised/stage-solo-1381.webp 1381w" sizes="(max-width: 768px) calc(100vw - 48px), (max-width: 1200px) 45vw, 620px" /><img class="now-photo" src="images/optimised/stage-solo.jpg" alt="Derek Rue performing on stage" width="1381" height="1855" loading="eager" decoding="async" /></picture>
       <div class="now-copy">
-        <p class="section-label">On Stage Now · 2026</p>
-        <h2>This season.</h2>
+        <p class="section-label">Selected stage credits · 2026</p>
+        <h2>On the opera stage.</h2>
         <ul class="now-list">
           <li class="now-item">
             <div class="now-date">2026 Season</div>
@@ -62,7 +85,7 @@
       <div class="season">
         <div class="season-year">2025 / 26</div>
         <div class="perf-row">
-          <div class="perf-main"><div class="perf-work">6th Symphony Concert — French Baroque</div><div class="perf-role">Works of Rameau · Featured Soloist · Philharmonic Orchestra of the City of Trier, cond. Wouter Padberg</div></div>
+          <div class="perf-main"><div class="perf-work">6th Symphony Concert , French Baroque</div><div class="perf-role">Works of Rameau · Featured Soloist · Philharmonic Orchestra of the City of Trier, cond. Wouter Padberg</div></div>
           <div class="perf-venue">Theater Trier</div>
         </div>
       </div>
@@ -120,7 +143,7 @@
       </div>
 
       <div class="season">
-        <div class="season-year">2020 – 21</div>
+        <div class="season-year">2020  to  21</div>
         <div class="perf-row">
           <div class="perf-main"><div class="perf-work">Die lustige Witwe</div><div class="perf-role">Lehár · Camille de Rossillon</div></div>
           <div class="perf-venue">Theater Trier</div>
@@ -197,13 +220,15 @@
       <p class="section-label">Book Derek</p>
       <h2>Bring the opera stage<br>to your own event.</h2>
       <p>Everything on this page happened in an opera house. Most Opera Lux evenings don't: they happen in dining rooms, courtyards, and ballrooms, with no stage and no production. Same performer, closer room. Send your date and Derek will check availability.</p>
-      <a href="index.html#contact" class="btn">Check Availability</a>
+      <a href="index.html#contact" class="btn">Check availability</a>
     </div>
   </section>
 
+  </main>
+
   <footer>
-    <div class="brand-lockup" role="img" aria-label="Opera Lux Events"><span class="bl-main">Opera Lux</span><span class="bl-rule" aria-hidden="true"></span><span class="bl-sub">Events</span></div>
-    <p>© 2026 Opera Lux Events · Germany &amp; Europe</p>
+    <div class="brand-lockup" role="img" aria-label="Opera Lux Events"><span class="bl-main">Opera Lux</span><span class="bl-rule" aria-hidden="true"></span> <span class="bl-sub">Events</span></div>
+    <p>© 2026 Opera Lux Events · Luxembourg &amp; Germany<br><a href="testimonials.html">Professional background</a> · <a href="privacy.html">Privacy</a></p>
   </footer>
 
   <script src="main.js" defer></script>
