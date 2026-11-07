@@ -1312,3 +1312,11 @@ details.faq-card { margin-bottom: .8rem; padding: 0; border-radius: 12px; }
   .live-photo-grid { grid-template-columns: minmax(0, 1fr); }
   .live-photo-grid .photo-item:first-child { grid-column: auto; }
 }
+
+/* Look C: restrained headline and kicker treatment. */
+h1, h2, .section h2, .formats-bg h2, .timeline-inner > h2, .press-inner > h2,
+.hero h1, .hero h1 em, .contact-left h2, .now-copy h2, .insta-inner h2 { font-weight: 500; }
+.hero h1 em { background: none; -webkit-background-clip: border-box; background-clip: border-box; color: var(--ivory); }
+.section-label, .hero-tag { font-weight: 500; color: var(--gold); }
+.formats-bg .section-label, .press-inner > .section-label, .video-bg .section-label { color: var(--gold); }
+.nav-links a { overflow-wrap: normal; white-space: nowrap; }
